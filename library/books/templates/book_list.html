@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block content %}
+    <h1>Список книг</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Год публикации</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.publication_year }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Книги не найдены.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Добавить новую книгу</h2>
+        <form method="POST" action="{% url 'book_list' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Название</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Автор</label>
+                <input type="text" class="form-control" id="author" name="author" required>
+            </div>
+            <div class="form-group">
+                <label for="publication_year">Год публикации</label>
+                <input type="number" class="form-control" id="publication_year" name="publication_year" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить книгу</button>
+        </form>
+
+        {% if errors %}
+        <div class="alert alert-danger mt-3">
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

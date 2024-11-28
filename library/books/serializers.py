@@ -20,9 +20,10 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ['id', 'author_name', 'author_surname', 'biography']
 
 class GenreSerializer(serializers.ModelSerializer):
+    books = serializers.HyperlinkedRelatedField(many=True, view_name='book_detail', read_only=True)
     class Meta:
         model = Genre
-        fields = ['id', 'genre_name']
+        fields = ['id', 'genre_name', 'books']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

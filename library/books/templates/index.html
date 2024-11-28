@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1 {
+            text-align: center;
+            margin: 20% 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% block header %}
+            <div>
+                <a href="{% url 'index' %}">Главная</a>
+                <a href="{% url 'user_list' %}">Пользователи</a>
+                <a href="{% url 'book_list' %}">Книги</a>
+                <a href="{% url 'author_list' %}">Авторы</a>
+                <a href="{% url 'genre_list' %}">Жанры</a>
+                <a href="{% url 'category_list' %}">Категории</a>
+            </div>
+            <div>
+                <a href="#">Добавить книгу</a>
+                <a href="#">Добавить книгу</a>
+                <a href="#">Добавить автора</a>
+                <a href="#">Добавить жанр</a>
+                <a href="#">Добавить категорию</a>
+            </div>
+        {% endblock %}
+    </header>
+    <main>
+        {% block content %}
+            <h1>Добро пожаловать</h1>
+        {% endblock %}
+    </main>
+</body>
+</html>
