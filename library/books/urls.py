@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
 from . import views
 from .models import Category
@@ -10,7 +9,7 @@ user_list = UserViewSet.as_view({
    'post': 'create'
 })
 user_detail = UserViewSet.as_view({
-   'get': 'retrieve',
+    'get': 'retrieve',
     'delete': 'destroy'
 })
 
@@ -59,7 +58,7 @@ category_detail = CategoryViewSet.as_view({
 })
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.api_root),
     path('users/', user_list, name='user_list'),
     path('users/<int:pk>/', user_detail, name='user_detail'),
     path('books/', book_list, name='book_list'),
@@ -70,4 +69,4 @@ urlpatterns = [
     path('genres/<int:pk>/', genre_detail, name='genre_detail'),
     path('categories/', category_list, name='category_list'),
     path('categories/<int:pk>/', category_detail, name='category_detail'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
