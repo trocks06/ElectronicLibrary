@@ -1,4 +1,5 @@
 # Библиотеки
+- Python 3.8
 - Django	4.2.17	5.1.4
 - asgiref	3.8.1	3.8.1
 - backports.zoneinfo	0.2.1	0.2.1
