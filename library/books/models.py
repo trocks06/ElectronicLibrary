@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Book(models.Model):
     book_name = models.CharField(max_length=100)
-    author = models.ForeignKey('Author',on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
     release_year = models.IntegerField(validators=[MinValueValidator(1000), MaxValueValidator(9999)])
     genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
@@ -20,9 +20,13 @@ class Book(models.Model):
         return self.book_name
 
 class Author(models.Model):
-    author_name = models.CharField(max_length=100, unique=True)
-    author_surname = models.CharField(max_length=100, unique=True)
+    author_name = models.CharField(max_length=100)
+    author_surname = models.CharField(max_length=100)
     biography = models.TextField(default='Информация отсутствует')
+    books = models.ManyToManyField(Book, related_name='authors')
+
+    class Meta:
+        unique_together = ('author_name', 'author_surname')
 
     def __str__(self):
         return self.author_name + ' ' + self.author_surname

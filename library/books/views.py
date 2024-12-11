@@ -16,11 +16,11 @@ def index(request):
 @api_view(['GET'])
 def api_root(request, format=None):
    return Response({
-       'users': reverse('user_list', request=request, format=format),
-       'books': reverse('book_list', request=request, format=format),
-       'authors': reverse('author_list', request=request, format=format),
-       'genres': reverse('genre_list', request=request, format=format),
-       'categories': reverse('category_list', request=request, format=format),
+       'users': reverse('user-list', request=request, format=format),
+       'books': reverse('book-list', request=request, format=format),
+       'authors': reverse('author-list', request=request, format=format),
+       'genres': reverse('genre-list', request=request, format=format),
+       'categories': reverse('category-list', request=request, format=format),
    })
 
 class UserViewSet(viewsets.ModelViewSet):
