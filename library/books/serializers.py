@@ -27,7 +27,6 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
                 raise serializers.ValidationError("Учебник с таким изданием уже существует!")
         return attrs
 
-
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     books = HyperlinkedRelatedField(view_name='books_detail', many=True, read_only=True)
     class Meta:

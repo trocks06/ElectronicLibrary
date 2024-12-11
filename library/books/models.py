@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-# Create your models here.
 class Book(models.Model):
     book_name = models.CharField(max_length=100)
     author = models.ForeignKey('Author', on_delete=models.CASCADE)
