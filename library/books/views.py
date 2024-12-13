@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status, generics, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from .models import *
+from rest_framework.filters import SearchFilter
+
+from .permissions import IsAdminOrReadOnly
 from .serializers import *
 
 def index(request):
@@ -25,19 +25,26 @@ def api_root(request, format=None):
 class UserViewSet(viewsets.ModelViewSet):
    queryset = User.objects.all()
    serializer_class = UserSerializer
+   permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
 
 class BookViewSet(viewsets.ModelViewSet):
    queryset = Book.objects.all()
    serializer_class = BookSerializer
+   permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
+   filter_backends = (SearchFilter,)
+   search_fields = ['book_name', 'author__author_name', 'author__author_surname','genre__genre_name']
 
 class AuthorViewSet(viewsets.ModelViewSet):
    queryset = Author.objects.all()
    serializer_class = AuthorSerializer
+   permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
 
 class GenreViewSet(viewsets.ModelViewSet):
    queryset = Genre.objects.all()
    serializer_class = GenreSerializer
+   permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
 
 class CategoryViewSet(viewsets.ModelViewSet):
    queryset = Category.objects.all()
    serializer_class = CategorySerializer
+   permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
