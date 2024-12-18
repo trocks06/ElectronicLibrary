@@ -17,3 +17,5 @@
 - Прописать в терминале команду: pip install django
 - Прописать в терминале команду: pip install djangorestframework
 - Прописать в терминале команду: pip install pillow
+- Прописать в терминале команду: python manage.py makemigrations
+- Прописать в терминале команду: python manage.py migrate
